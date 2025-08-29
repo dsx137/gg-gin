@@ -8,4 +8,4 @@ func NewResponse[T any](data T) *Response[T] {
 	return &Response[T]{Data: &data}
 }
 
-var OK = NewResponse("OK")
+var Ok = NewResponse("ok")
