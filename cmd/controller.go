@@ -9,7 +9,7 @@ type ControllerIndex struct{}
 
 func NewControllerIndex(g *gin.RouterGroup) *ControllerIndex {
 	ctl := &ControllerIndex{}
-	g.GET("/", gggin.HandleController(ctl.Handle))
+	g.GET("/", gggin.ToGinHandler(ctl.Handle))
 	return ctl
 }
 
