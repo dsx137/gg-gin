@@ -17,6 +17,7 @@ func NewHttpError(statusCode int, message string) *HttpError {
 
 func (e *HttpError) Error() string { return e.Message }
 
+// EXPERIMENTAL: 不建议在统一流程控制错误处理中使用
 func AsHttpErrorOrElse(err error, defaultCode int) *HttpError {
 	if err == nil {
 		return nil
