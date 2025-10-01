@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var CtxKeySuccessCode = "success_code"
+
 type Handler[T any] func(c *gin.Context) (*Response[T], *HttpError)
 
 func ToGinHandler[T any](handler Handler[T]) func(c *gin.Context) {
@@ -15,6 +17,10 @@ func ToGinHandler[T any](handler Handler[T]) func(c *gin.Context) {
 			c.JSON(err.StatusCode, NewResponse(err.Message))
 			return
 		}
-		c.JSON(http.StatusOK, res)
+		code, ok := Get[int](c, CtxKeySuccessCode)
+		if !ok {
+			code = http.StatusOK
+		}
+		c.JSON(code, res)
 	}
 }

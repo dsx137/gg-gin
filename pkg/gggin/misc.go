@@ -13,5 +13,10 @@ func Get[T any](c *gin.Context, key string) (T, bool) {
 	if !ok {
 		return *new(T), false
 	}
-	return ret.(T), true
+
+	val, ok := ret.(T)
+	if !ok {
+		return *new(T), false
+	}
+	return val, true
 }
